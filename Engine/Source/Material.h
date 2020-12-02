@@ -1,11 +1,17 @@
 #pragma once
 
 #include "Texture.h"
-#include "Util/Vector3f.h"
+
+#include <GDT/Vector3f.h>
+
+namespace GDT
+{
+    class ShaderProgram;
+}
+
+using GDT::ShaderProgram;
 
 namespace Flux {
-    class Shader;
-
     class Material {
     public:
         Material()
@@ -22,10 +28,10 @@ namespace Flux {
         Texture2D roughnessTex;
         Texture2D stencilTex;
         Texture2D emissionTex;
-        Vector3f emission;
+        GDT::Vector3f emission;
         float tilingX, tilingY;
 
-        void bind(Shader& shader) const;
-        void release(Shader& shader) const;
+        void bind(ShaderProgram& shader) const;
+        void release(ShaderProgram& shader) const;
     };
 }

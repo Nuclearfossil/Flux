@@ -1,20 +1,11 @@
-/* ---------------------------------------------------------------------------
-** This software is in the public domain, furnished "as is", without technical
-** support, and with no warranty, express or implied, as to its usefulness for
-** any purpose.
-**
-** Matrix4f.h
-** Declares a 4x4 matrix consisting of 16 float values and its helper functions
-**
-** Author: Julian Thijssen
-** -------------------------------------------------------------------------*/
-
 #pragma once
 
 #include <string>
 
-namespace Flux {
+namespace GDT
+{
     class Vector3f;
+    class Vector4f;
 
     class Matrix4f {
     public:
@@ -31,7 +22,8 @@ namespace Flux {
         void scale(float scale);
         void scale(const Vector3f& scale);
         Vector3f transform(const Vector3f& v, int w) const;
-        
+
+        const float* toArray() const;
         float* toArray();
         std::string str() const;
 
@@ -41,12 +33,13 @@ namespace Flux {
         bool operator==(const Matrix4f& m) const;
         bool operator!=(const Matrix4f& m) const;
         Matrix4f operator*(const Matrix4f& m) const;
-        Vector3f operator*(const Vector3f& m) const;
+        Vector4f operator*(const Vector4f& v) const;
+        Vector3f operator*(const Vector3f& v) const;
     private:
         Matrix4f(float m0, float m1, float m2, float m3,
-                 float m4, float m5, float m6, float m7,
-                 float m8, float m9, float m10, float m11,
-                 float m12, float m13, float m14, float m15);
+            float m4, float m5, float m6, float m7,
+            float m8, float m9, float m10, float m11,
+            float m12, float m13, float m14, float m15);
 
         float a[16];
     };
